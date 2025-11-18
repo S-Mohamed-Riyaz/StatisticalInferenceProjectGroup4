@@ -7,7 +7,7 @@ mle_exp <- function(lambda, n) {
 
 
 #1.2
-SEEDNUMBER <-25203533
+SEEDNUMBER <-25203533 + 25189506
 set.seed(SEEDNUMBER)
 one_mle <- mle_exp(lambda = 1, n = 10)
 one_mle
