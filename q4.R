@@ -38,7 +38,7 @@ boxplot(Y ~ quarter, data = data, main="Productivity by quarter")
 
 
 #------------------------------------------------------------------------------------iv
-#--------------------- Standardisation indispensable --------------------------
+
 X <- model.matrix(actual_productivity ~ ., data = data)[, -1]
 X <- scale(X)
 Y <- as.numeric(data$actual_productivity)
@@ -46,7 +46,7 @@ Y <- as.numeric(data$actual_productivity)
 n <- nrow(X)
 p <- ncol(X)
 
-#--------------------- Réseaux de neurones : MSE et BIC -----------------------
+
 best_mse <- rep(NA, 6)
 best_bic <- rep(NA, 6)
 
@@ -72,7 +72,7 @@ for (q in 1:6) {
 results <- data.frame(q = 1:6, MSE = best_mse, BIC = best_bic)
 print(results)
 
-#----------------------- Régression linéaire -----------------------------------
+
 lm_fit <- lm(actual_productivity ~ ., data = data)
 lm_pred <- predict(lm_fit)
 lm_mse <- mean((data$actual_productivity - lm_pred)^2)
@@ -86,7 +86,7 @@ lm_bic
 
 
 
-# ---------------- 4.v : computation de l’importance  --------------------
+
 
 q_best <- 1
 
@@ -125,22 +125,22 @@ importance <- data.frame(
 
 importance <- importance[order(-importance$Delta_BIC), ]
 importance
-# Liste des vraies variables continues du dataset
+
 num_vars <- c("targeted_productivity","smv","wip","over_time",
               "incentive","idle_time","idle_men",
               "no_of_style_change","no_of_workers")
 
-# Colonnes correspondantes dans X
+
 continuous_cols <- colnames(X)[colnames(X) %in% num_vars]
 
-# Filtrer le tableau importance pour ne garder que ces variables
+
 importance_cont <- importance[importance$variable %in% continuous_cols, ]
 
-# Sélection des 3 variables continues les plus importantes (ΔBIC le moins négatif)
+
 top3_vars <- tail(importance_cont[order(-importance_cont$Delta_BIC), ], 3)$variable
 top3_vars
 
-# ---------------- 4.vi : τ̂-effect plots  --------------------
+
 
 plot_effect <- function(var_name, model, X) {
   j <- which(colnames(X) == var_name)
