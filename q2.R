@@ -15,7 +15,7 @@ samples <- lapply(thetas, function(th) simulate_custom(5000, th, xmax))
 names(samples) <- paste0("theta_", thetas)
 
 samples
-par(mfrow = c(2,2))  # 4 graphiques
+par(mfrow = c(2,2))  
 
 for (theta in thetas) {
   x <- simulate_custom(5000, theta, xmax)
@@ -24,7 +24,7 @@ for (theta in thetas) {
        main = paste("theta =", theta),
        xlab = "x", probability = TRUE)
   
-  # moyenne théorique
+
   EX <- theta / (theta + 1) * xmax
   
   abline(v = EX, col = "red", lwd = 2)
