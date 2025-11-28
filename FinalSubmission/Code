@@ -907,6 +907,7 @@ df <- as.data.frame(OutputData)
 
 Overall_Performance$Performance_Wald_CI[3] = Performance
 Overall_Performance <-  Overall_Performance[order(Overall_Performance$SampleSize),]
+print(Overall_Performance)
 
 # End of Qn 3
 # ------------------------------------------------------------------------------
